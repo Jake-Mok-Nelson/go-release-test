@@ -21,8 +21,7 @@ CLEAN_TAG=$(echo "$GITHUB_REF_NAME" | sed 's/^v//')
 VERSION=$(cat version/VERSION)
 if [[ "$VERSION" != "$CLEAN_TAG" ]]; then
     echo "The VERSION file does not match the tag. Please update the version/VERSION file to match the tag without the v prefix."
-    echo """The VERSION file contains: $VERSION
-        The tag is: $CLEAN_TAG"""
+    echo "The VERSION file contains: $VERSION but the tag is: $CLEAN_TAG."
     exit 1
 fi
 
