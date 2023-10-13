@@ -66,8 +66,6 @@ jobs:
 
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v4
-        # run only if Compare versions was successful
-        if: steps.compare.conclusions == 'success'
         with:
           version: v1.20.0
           args: release --clean --timeout=60m --snapshot=${{ !startsWith(github.ref, 'refs/tags/v') }}
