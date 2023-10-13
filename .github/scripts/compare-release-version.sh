@@ -9,14 +9,14 @@ if [[ ! -f version/VERSION ]]; then
     exit 1
 fi
 
-# Bail if the version tag was not provided
-if [[ -z "$TAG" ]]; then
-    echo "The version tag was not provided."
+# Bail if the input was not a tag
+if [[ ! "$GITHUB_REF_TYPE" == "tag" ]]; then
+    echo "This action only runs on tags. Please create a tag and try again."
     exit 1
 fi
 
 # Create a clean semver tag from $TAG without the v prefix
-CLEAN_TAG=$(echo "$TAG" | sed 's/^v//')
+CLEAN_TAG=$(echo "$GITHUB_REF_NAME" | sed 's/^v//')
 
 VERSION=$(cat version/VERSION)
 if [[ "$VERSION" != "$CLEAN_TAG" ]]; then
